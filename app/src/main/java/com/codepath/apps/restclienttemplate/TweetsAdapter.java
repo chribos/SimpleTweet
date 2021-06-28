@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,10 @@ import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 
 //after defining viewholder, extend rv adapter and paramertize with viewholder we just defined
@@ -63,12 +67,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
+        TextView tvTime;
         //this itemView that is passed in is a representation of one row of the recycler view aka a tweet
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvBody = itemView.findViewById(R.id.tvBody);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
+            tvTime = itemView.findViewById(R.id.tvTime);
 
         }
 
@@ -76,6 +82,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             //fill out tweet attributes
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
+            tvTime.setText(tweet.relTime);
             //load imageurl with Glide (included in build gradle already)
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
 
