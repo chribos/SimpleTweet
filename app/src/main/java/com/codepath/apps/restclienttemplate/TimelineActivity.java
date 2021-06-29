@@ -1,9 +1,11 @@
 package com.codepath.apps.restclienttemplate;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,7 @@ public class TimelineActivity extends AppCompatActivity {
     Button logout;
 
     public static final String TAG = "TimelineActivity";
+    private final int REQUEST_CODE = 20;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,11 +80,33 @@ public class TimelineActivity extends AppCompatActivity {
             //Compose icon has been selected
             Toast.makeText(this, "compose", Toast.LENGTH_SHORT).show();
 
-            //navigate to compose activity
+            //navigate to compose activity with intent (compose tweets after setting up tweet button and compose box
+            Intent intent = new Intent(this, ComposeActivity.class);
+            //change start activity to reflect your new tweet on the homepage
+            //this launches child activity (compose) and will retunr a tweet if it was submitted successfuly
+            //to notify we need to modify onActivityResult
+            startActivityForResult(intent, REQUEST_CODE);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        if(  requestCode == REQUEST_CODE && resultCode == RESULT_OK ) {
+            //GET DATA (tweet object) FROM INTENT
+          Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
+            //update recycler view from new tweet
+            //modify data source
+            tweets.add(0, tweet);
+            adapter.notifyItemInserted(0);
+            //update adapter
+
+            //scroll
+            rvTweets.smoothScrollToPosition(0);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void populateHomeTimeline() {
