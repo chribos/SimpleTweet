@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
 //after defining viewholder, extend rv adapter and paramertize with viewholder we just defined
@@ -31,6 +32,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     public TweetsAdapter(Context context, List<Tweet> tweets) {
         this.context = context;
         this.tweets = tweets;
+    }
+    public void clear() {
+        tweets.clear();
+        notifyDataSetChanged();
+    }
+    public void addAll(List<Tweet> list) {
+        tweets.addAll(list);
+        notifyDataSetChanged();
     }
 
 
@@ -68,6 +77,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView tvBody;
         TextView tvScreenName;
         TextView tvTime;
+        ImageView tvImage;
         //this itemView that is passed in is a representation of one row of the recycler view aka a tweet
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,7 +85,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvBody = itemView.findViewById(R.id.tvBody);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
             tvTime = itemView.findViewById(R.id.tvTime);
-
+            tvImage = itemView.findViewById(R.id.tvImage);
         }
 
         public void bind(Tweet tweet) {
@@ -85,6 +95,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvTime.setText(tweet.relTime);
             //load imageurl with Glide (included in build gradle already)
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
+            Glide.with(context).load(tweet.mediaUrl).centerCrop().transform(new RoundedCornersTransformation(30, 10)).override(1000,500).into(tvImage);
+
 
         }
     }

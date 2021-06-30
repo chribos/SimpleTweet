@@ -19,6 +19,7 @@ public class Tweet {
     public String createdAt;
     public User user;
     public String relTime;
+    public String mediaUrl;
 
     public Tweet(){}
 
@@ -44,6 +45,14 @@ public class Tweet {
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.relTime = tweet.getRelTime(tweet.createdAt);
+        JSONObject entities = jsonObject.getJSONObject("entities");
+
+        if(entities.has ("media")) {
+            tweet.mediaUrl = entities.getJSONArray("media").getJSONObject(0).getString("media_url_https");
+        }
+        else {
+            tweet.mediaUrl= "";
+        }
         return tweet;
     }
     public static List<Tweet> fromJsonArray (JSONArray jsonArray) throws JSONException {
