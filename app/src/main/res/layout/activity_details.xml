@@ -29,7 +29,7 @@
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="meatballman1987"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/tvBody"
@@ -41,36 +41,28 @@
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="I love perforated business cards"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:autoLink="all"
+        android:linksClickable="true"/>
 
     <TextView
         android:id="@+id/tvTime"
-        android:layout_width="128dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tvBody"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="-6dp"
-        android:layout_toEndOf="@+id/tvHandle"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/tvHandle"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_height="match_parent"
         android:layout_above="@+id/tvBody"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="-1dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="178dp"
+        android:layout_marginBottom="-2dp"
         android:layout_toEndOf="@+id/tvScreenName"
         android:text="TextView" />
 
     <ImageView
         android:id="@+id/tvImage"
-        android:layout_width="match_parent"
+        android:layout_width="339dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvBody"
         android:layout_marginStart="1dp"
@@ -79,22 +71,20 @@
         android:layout_marginRight="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:srcCompat="@tools:sample/avatars" />
-
     <ImageButton
         android:id="@+id/heart"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvImage"
         android:layout_marginStart="100dp"
         android:layout_marginTop="3dp"
         android:layout_toEndOf="@+id/retweet"
         android:background="#00FFFFFF"
-        app:srcCompat="@drawable/ic_vector_heart_stroke" />
-
+        app:srcCompat="@drawable/ic_vector_heart_stroke"/>
     <ImageButton
         android:id="@+id/retweet"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvImage"
         android:layout_marginStart="100dp"
         android:layout_marginTop="5dp"
@@ -105,11 +95,10 @@
     <ImageButton
         android:id="@+id/reply"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvImage"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
         android:background="#00FFFFFF"
         app:srcCompat="@android:drawable/sym_action_chat" />
 </RelativeLayout>

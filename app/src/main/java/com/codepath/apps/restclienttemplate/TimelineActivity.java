@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -112,6 +113,10 @@ public class TimelineActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate the menu to add items to the action bar
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_launcher_twitter_round);
+        actionBar.setDisplayUseLogoEnabled(true);
         return true;
     }
 
@@ -125,7 +130,7 @@ public class TimelineActivity extends AppCompatActivity {
             //navigate to compose activity with intent (compose tweets after setting up tweet button and compose box
             Intent intent = new Intent(this, ComposeActivity.class);
             //change start activity to reflect your new tweet on the homepage
-            //this launches child activity (compose) and will retunr a tweet if it was submitted successfuly
+            //this launches child activity (compose) and will return a tweet if it was submitted successfuly
             //to notify we need to modify onActivityResult
             startActivityForResult(intent, REQUEST_CODE);
             return true;

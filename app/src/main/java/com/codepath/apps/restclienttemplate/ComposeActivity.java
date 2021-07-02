@@ -23,6 +23,8 @@ public class ComposeActivity extends AppCompatActivity {
     public static final int MAX_TWEET_LENGTH = 140;
     EditText etCompose;
     Button btnTweet;
+    Tweet tweet;
+
 
     //add reference to twitterClient
     TwitterClient client;
@@ -36,6 +38,12 @@ public class ComposeActivity extends AppCompatActivity {
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
 
+        //unwrap intent that is sent when reply button is clicked
+        tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
+        //if tweet is not empty start reply with user handle
+        if(tweet != null) {
+            etCompose.setText("@" + tweet.user.screenName);
+        }
         //Set click listener on button
         btnTweet.setOnClickListener(new View.OnClickListener() {
             @Override
