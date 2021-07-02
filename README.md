@@ -46,7 +46,7 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 
-![Alt Text](Flix%20Walkthrough.gif)
+![Alt Text](Walkthrough.gif)
 
 
 ## Notes
